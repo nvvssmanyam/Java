@@ -1,0 +1,9 @@
+001.hello.c		Hello world.
+002.name.c		Display your name
+003.nameaddr.c		Input your name, address and Display it.
+004.interests.c		Find the simple interest and compound interest s = (pnr/100) c= p * (1 + r/100)^n
+005.tempconv.c		Convert temperature in centigrade to farien heit
+006.areatriangle.c	Find area of a triangle from sides
+007.sizesof.c		print size of all data types on your system
+008.degrad.c		convert a number given in degrees to  radiants
+009.raddeg.c		convert a number given in radiants to degrees
