@@ -62,6 +62,7 @@ public class StoresAPIController {
 	}
 	
 	@PostMapping("/location")
+	@ResponseBody
 	public Location createLocation(@Valid @RequestBody Location location) {
 		return locService.saveLocation(location);
 	}

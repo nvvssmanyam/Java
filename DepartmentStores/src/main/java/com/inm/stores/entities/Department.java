@@ -39,8 +39,8 @@ public class Department {
 	@JsonIgnore
 	private List<Location> locations = new ArrayList<>();
 	
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="dpt_id")
+//	@JoinColumn(name="dpt_id")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="department")
 	private List<Category> categories;
 
 	public int getDeptId() {

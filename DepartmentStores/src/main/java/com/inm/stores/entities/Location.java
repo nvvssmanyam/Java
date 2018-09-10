@@ -28,7 +28,7 @@ public class Location {
 	@Column(name="loc_name")
 	private String locName;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, targetEntity=Department.class)
 	@JoinTable(
 			name="dept_locations",
 			joinColumns= {@JoinColumn(name="loc_id")}, 
