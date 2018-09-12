@@ -99,6 +99,7 @@
                     <button type="button" class="btn btn-primary pull-left addEntityModalBtn" data-toggle="modal" data-target="#addEntityModal">
                         Add Department
                     </button>
+                    <intpu type="hidden" id="deptsOfLoc"/>
                     <div class="row form-group"></div>
                     <table id="deptsTable" class="table table-striped table-bordered display" style="width: 100%">
                         <thead>
@@ -121,6 +122,7 @@
                       <button type="button" class="btn btn-primary pull-left addEntityModalBtn" data-toggle="modal" data-target="#addEntityModal">
                           Add Category
                       </button>
+                      <intpu type="hidden" id="catgsOfDept"/>
                       <div class="row form-group"></div>
                       <table id="catgsTable" class="table table-striped table-bordered display" style="width: 100%">
                           <thead>
@@ -142,6 +144,7 @@
                       <button type="button" class="btn btn-primary pull-left addEntityModalBtn" data-toggle="modal" data-target="#addEntityModal">
                           Add SubCategory
                       </button>
+                      <input type="hidden" id="subCatgsOfCatgs"/>
                       <div class="row form-group"></div>
                       <table id="subCatgsTable" class="table table-striped table-bordered display" style="width: 100%">
                           <thead>
@@ -158,11 +161,29 @@
           </div>
         </div>
 
-        <!-- Alert Div -->
-              <div id="alert-message" class="alert alert-danger" role="alert">
-                  <button type="button" class="close" data-dismiss="alert">&times;</button>
-                  test error message
+        <!-- Alert Div 
+        <div id="alert-message" class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            test error message
+        </div> -->
+        <!-- Alert Model -->
+        <!-- Modal -->
+        <div class="modal fade" id="alert-modal" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="alert-header">Modal Header</h4>
               </div>
+              <div class="modal-body">
+                <p id="alert-message"></p>
+              </div>
+            </div>
+            
+          </div>
+        </div>      
 
       </div>
     
@@ -187,6 +208,7 @@
                   +locId+","+value.deptId+")' id="+value.deptId+" class='btn btn-danger btn-sm delRecord'><span class='glyphicon glyphicon-trash'></span></button></td></tr>";
                 });
               }
+              $("#deptsOfLoc").val(locId);
               $("#deptsTable tbody").append(content);
               $(".deptsDiv").show();
             } 
@@ -210,6 +232,7 @@
                   +locId+","+deptId+","+value.catId+")' id="+value.catId+" class='btn btn-danger btn-sm delRecord'><span class='glyphicon glyphicon-trash'></span></button></td></tr>";
                 });
               }
+              $("#catgsOfDept").val(deptId);
               $("#catgsTable tbody").append(content);
               $(".catgsDiv").show();
             } 
@@ -232,6 +255,7 @@
                   +locId+","+deptId+","+catId+","+value.subCatId+")' id="+value.subCatId+" class='btn btn-danger btn-sm delRecord'><span class='glyphicon glyphicon-trash'></span></button></td></tr>";
                 });
               }
+              $("#subCatgsOfCatgs").val(catId);
               $("#subCatgsTable tbody").append(content);
               $(".subCatgsDiv").show();
             } 
@@ -254,20 +278,22 @@
           type : "DELETE",
           success : function(response) {
             if(response == 1) {
-              $("#alert-message").attr('class', 'alert alert-success');
+              $("#alert-header").parent().attr('class', 'alert alert-success');
+              $("#alert-header").text("Success");
               $("#alert-message").text("Record deleted sucessfully.");
-              $("#alert-message").show();
-              $("#launchStores").click();
+              $("#alert-modal").modal('show');
             } else {
-              $("#alert-message").attr('class', 'alert alert-danger');
-              $("#alert-message").text("Record not deleted. Unique contraint error.")
-              $("#alert-message").show();
+              $("#alert-header").parent().attr('class', 'alert  alert-danger');
+              $("#alert-header").text("Failed");
+              $("#alert-message").text("Record not deleted. Unique contraint error.");
+              $("#alert-modal").modal('show');
             }
           },
           error : function(error) {
-            $("#alert-message").attr('class', 'alert alert-danger');
-            $("#alert-message").text("Record not deleted. Unique contraint error.")
-            $("#alert-message").show();
+            $("#alert-header").parent().attr('class', 'alert  alert-danger');
+            $("#alert-header").text("Failed");
+            $("#alert-message").text("OOPS... Something went wrong");
+            $("#alert-modal").modal('show');
           }
         });
       }
@@ -276,12 +302,12 @@
         $('#treeview_json').treeview({data: treeData});
       }
 
-        var createEntityUrls = {
-          "Location": "/api/v1/location/",
-          "Department": "/api/v1/location/1/department/",
-          "Category": "/api/v1/location/1/department/1/category/",
-          "SubCategory": "/api/v1/location/1/department/1/category/1/subcategory"
-        };
+        var apiEntityNames = {
+          "Location" : "locName",
+          "Department" : "deptName",
+          "Category" : "catName",
+          "SubCategory" : "subCatName"
+        }
       
       $(document).ready(function() {
         $(".treeDiv").hide();
@@ -289,18 +315,18 @@
         $(".deptsDiv").hide();
         $(".catgsDiv").hide();
         $(".subCatgsDiv").hide();
-        $("#alert-message").hide();
 
         $(".addEntityModalBtn").click(function() {
           var title = this.textContent.trim();
           var entity = title.split(" ")[1];
           $("#modalEntityTitle").text(title);
-          $("#entityName").attr("name", "locName");
-          $.each(createEntityUrls, function(key,value) {
+
+          // entityName and entityValue for request
+          $.each(apiEntityNames, function(key,value) {
             if(entity == key) {
-              formURL=value;
+              $("#entityName").attr("name", value);
             }
-          }); 
+          });
         });
 
         $("#launchStores").click(function() {
@@ -353,43 +379,52 @@
             }); 
            }
         });
-        $(".expandBtn").click(function() {
-          alert();
-        });
         
         $("#addEntityForm").submit(function(e) {
-          debugger;
+
+          var locationId = $("#deptsOfLoc").val();
+          var deptartmentId = $("#catgsOfDept").val();
+          var categoryId = $("#subCatgsOfCatgs").val();
+          if(categoryId != undefined && categoryId != "") {
+            urlString = "http://localhost:8080/api/v1/location/"+locationId+"/department/"+deptartmentId+"/category/"+categoryId+"/subcategory/";
+          } else if (deptartmentId != undefined && deptartmentId != "" ){
+            urlString = "http://localhost:8080/api/v1/location/"+locationId+"/department/"+deptartmentId+"/category/";
+          } else if (locationId != undefined && locationId != "") {
+            urlString = "http://localhost:8080/api/v1/location/"+locationId+"/department/";
+          } else {
+            urlString = "http://localhost:8080/api/v1/location/";
+          }
           var entitykey = $("#entityName").attr("name");
           var entityval = $("#entityName").val();
-          var entity = {
-            entitykey: entityval
-          }
+          var entity ={};
+          entity[entitykey] = entityval;
           
           var jsonData = JSON.stringify(entity);
           
           //if(title != "" && name != "" && phone != "" && ext != "" && fax != "" && email != "") {
               $.ajax({
                    type: "POST",
-                   url: formURL,
+                   url: urlString,
                    data: jsonData,
                    contentType: 'application/json; charset=utf-8',
                    dataType: 'json',
                    success: function(data)
                    {
-                     debugger;
-                       console.log(data); // show response from the php script.
-                       $('#addEntityModal').modal('hide');
-                       $("#lnchstoresTree").click();
+                    $('#addEntityModal').modal('hide');
+                    $("#alert-header").parent().attr('class', 'alert alert-success');
+                    $("#alert-header").text("Success");
+                    $("#alert-message").text("Record Added sucessfully.");
+                    $("#alert-modal").modal('show');
                    },
                    error: function(data)
                    {
-                     debugger;
-                     console.log(data);
-                     alert(data.status);
+                    $('#addEntityModal').modal('hide');
+                    $("#alert-header").parent().attr('class', 'alert  alert-danger');
+                    $("#alert-header").text("Failed");
+                    $("#alert-message").text("OOPS... Something went wrong");
+                    $("#alert-modal").show();
                    }
                  });
-          //}				
-  
             e.preventDefault(); // avoid to execute the actual submit of the form.
         });
         
