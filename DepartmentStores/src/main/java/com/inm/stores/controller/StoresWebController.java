@@ -9,7 +9,7 @@ public class StoresWebController {
 	@GetMapping("/home")
 	public ModelAndView loginMessage() {
 		ModelAndView model = new ModelAndView();
-		model.setViewName("welcome");
+		model.setViewName("stores");
 		return model;
 	}
 }

@@ -42,12 +42,13 @@ public class DepartmentStoresApplicationTests {
 	@Test
 	public void testCreateLocationWithDept() {
 		
-//		Set<Department> depts = new HashSet<>();
-//		Department d1 = new Department("Grocery");
-//		depts.add(d1);
-//		
-//		Location l1 = new Location(2, "RJY", depts);
-//		locRepository.save(l1);
+		Set<Department> depts = new HashSet<>();
+		Department d1 = new Department();
+		d1.setDeptName("Grocery");
+		depts.add(d1);
+		
+		Location l1 = new Location(2, "RJY", depts);
+		locRepository.save(l1);
 	}
 	
 	@Test
