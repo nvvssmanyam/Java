@@ -61,13 +61,4 @@ public class DepartmentStoresApplicationTests {
 		}
 	}
 	
-	@Test
-	public void testCreateCategory() {
-		Optional<Department> dept = deptRepository.findById(4);
-		if(dept.get() != null) {
-			Category category = new Category("Milk", dept.get());
-			catRepository.save(category);
-		}
-	}
-
 }
