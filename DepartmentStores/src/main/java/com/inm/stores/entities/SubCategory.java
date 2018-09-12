@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="subcategory")
 public class SubCategory {
@@ -19,11 +21,12 @@ public class SubCategory {
 	@Column(name="subcat_id")
 	private int subCatId;
 	
-	@Column(name="subcat_name")
+	@Column(name="subcat_name", nullable=false)
 	private String subCatName;
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="cat_id")
+	@JsonIgnore
 	private Category category;
 
 	public int getSubCatId() {

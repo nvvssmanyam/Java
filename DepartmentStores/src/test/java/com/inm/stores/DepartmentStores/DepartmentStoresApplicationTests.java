@@ -1,8 +1,10 @@
 package com.inm.stores.DepartmentStores;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,12 +42,12 @@ public class DepartmentStoresApplicationTests {
 	@Test
 	public void testCreateLocationWithDept() {
 		
-		List<Department> depts = new ArrayList<>();
-		Department d1 = new Department(2, "Grocery");
-		depts.add(d1);
-		
-		Location l1 = new Location(2, "RJY", depts);
-		locRepository.save(l1);
+//		Set<Department> depts = new HashSet<>();
+//		Department d1 = new Department("Grocery");
+//		depts.add(d1);
+//		
+//		Location l1 = new Location(2, "RJY", depts);
+//		locRepository.save(l1);
 	}
 	
 	@Test

@@ -52,7 +52,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	@Override
 	public List<Category> getCategoryByDeptId(int id) {
-		return null;
+		return deptRepository.findAllCategories(id);
 	}
 
 

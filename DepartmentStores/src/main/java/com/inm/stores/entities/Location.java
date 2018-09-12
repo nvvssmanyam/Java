@@ -1,10 +1,6 @@
 package com.inm.stores.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.inm.stores.entities.Department;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,16 +21,16 @@ public class Location {
 	@Column(name="loc_id")
 	private int locId;
 	
-	@Column(name="loc_name")
+	
+	@Column(name="loc_name", nullable=false)
 	private String locName;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, targetEntity=Department.class)
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER, targetEntity=Department.class)
 	@JoinTable(
 			name="dept_locations",
 			joinColumns= {@JoinColumn(name="loc_id")}, 
 			inverseJoinColumns = {@JoinColumn(name="dept_id")})
-	@JsonIgnore
-	List<Department> departments = new ArrayList<>();
+	Set<Department> departments;
 	
 	public int getLocId() {
 		return locId;
@@ -48,17 +44,17 @@ public class Location {
 	public void setLocName(String locName) {
 		this.locName = locName;
 	}
-	public List<Department> getDepartments() {
+	public Set<Department> getDepartments() {
 		return departments;
 	}
-	public void setDepartments(List<Department> departments) {
+	public void setDepartments(Set<Department> departments) {
 		this.departments = departments;
 	}
 	
 	public Location() {
 
 	}
-	public Location(int locId, String locName, List<Department> departments) {
+	public Location(int locId, String locName, Set<Department> departments) {
 		super();
 		this.locId = locId;
 		this.locName = locName;

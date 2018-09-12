@@ -50,7 +50,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 
 	@Override
 	public List<SubCategory> getAllSubCategoriesByCatId(int id) {
-		return subCatRepository.find(id);
+		return (List<SubCategory>) subCatRepository.find(id);
 	}
 	
 }

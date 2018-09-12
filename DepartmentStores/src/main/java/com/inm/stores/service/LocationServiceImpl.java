@@ -2,6 +2,7 @@ package com.inm.stores.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,8 +55,13 @@ public class LocationServiceImpl implements LocationService {
 	}
 
 	@Override
-	public List<Department> getDepartmentsByLocation(int id) {
+	public Set<Department> getDepartmentsByLocation(int id) {
 		return deptRepository.find(id);
+	}
+	
+	@Override
+	public Set<Department> getAllDepartments() {
+		return deptRepository.findAllDepts();
 	}
 
 }

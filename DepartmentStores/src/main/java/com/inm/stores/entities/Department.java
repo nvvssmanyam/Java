@@ -10,8 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -26,20 +24,13 @@ public class Department {
 	@Column(name="dept_id")
 	private int deptId;
 	
-	@Column(name="dept_name")
+	@Column(name="dept_name", nullable=false)
 	private String deptName;
 	
-/*	@ManyToMany(cascade= {CascadeType.ALL}, fetch=FetchType.LAZY)
-	@JoinTable(
-			name="dept_locations", 
-			joinColumns= {@JoinColumn(name="dept_id")}, 
-			inverseJoinColumns = {@JoinColumn(name="loc_id")})*/
-	
-	@ManyToMany(fetch=FetchType.LAZY, mappedBy="departments")
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER, mappedBy="departments")
 	@JsonIgnore
 	private List<Location> locations = new ArrayList<>();
 	
-//	@JoinColumn(name="dpt_id")
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="department")
 	private List<Category> categories;
 
@@ -75,13 +66,38 @@ public class Department {
 		this.categories = categories;
 	}
 
-	public Department(int deptId, String deptName) {
-		this.deptId = deptId;
+	public Department(String deptName, List<Location> location ) {
 		this.deptName = deptName;
+		this.locations = location;
 	}
 
 	public Department() {
 		
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((deptName == null) ? 0 : deptName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Department other = (Department) obj;
+		if (deptName == null) {
+			if (other.deptName != null)
+				return false;
+		} else if (!deptName.equals(other.deptName))
+			return false;
+		return true;
 	}
 	
 }

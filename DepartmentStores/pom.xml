@@ -7,7 +7,7 @@
 	<groupId>com.inm.stores</groupId>
 	<artifactId>DepartmentStores</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>DepartmentStores</name>
 	<description>Demo project for Spring Boot</description>
@@ -74,6 +74,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		
 	</dependencies>
 
 	<build>

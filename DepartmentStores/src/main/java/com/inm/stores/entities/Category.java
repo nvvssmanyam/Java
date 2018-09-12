@@ -2,6 +2,7 @@ package com.inm.stores.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,16 +22,15 @@ public class Category {
 	@Column(name="cat_id")
 	private int catId;
 	
-	@Column(name="cat_name")
+	@Column(name="cat_name", nullable=false)
 	private String catName;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name="dpt_id")
 	@JsonIgnore
 	private Department department;
 	
 	@OneToMany(mappedBy="category")
-	@JsonIgnore
 	private List<SubCategory> subCategories;
 
 	public int getCatId() {
