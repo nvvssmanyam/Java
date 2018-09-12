@@ -125,6 +125,10 @@
     $(".deptsDiv").hide();
     $(".catgsDiv").hide();
     $(".subCatgsDiv").hide();
+    $(".alertClose").click(function() {
+    	$('#alert-modal').modal('hide');
+    	$('.modal-backdrop').remove();
+    });
 
     $(".addEntityModalBtn").click(function() {
       var title = this.textContent.trim();
@@ -232,7 +236,7 @@
                 $("#alert-header").parent().attr('class', 'alert  alert-danger');
                 $("#alert-header").text("Failed");
                 $("#alert-message").text("OOPS... Something went wrong");
-                $("#alert-modal").show();
+                $("#alert-modal").modal('show');
                }
              });
         e.preventDefault(); // avoid to execute the actual submit of the form.
