@@ -59,8 +59,7 @@
       <div class="row form-group"></div>
     
       <div class="container">
-        <div class="well clearfix">
-          <div class="col-md-12">
+        <div class="well clearfix col-md-12">
             <!--Tree view panel -->
             <div class="panel panel-default treeDiv">
               <div class="panel-heading">Department Stores Treeview</div>
@@ -95,7 +94,7 @@
             </div>
             <!-- Departments table panel -->
             <div class="panel panel-default deptsDiv">
-                <div class="panel-heading">Store Departments</div>
+                <div class="panel-heading"><span>Store Departments</span></div>
                 <div class="panel-body">
                     <button type="button" class="btn btn-primary pull-left addEntityModalBtn" data-toggle="modal" data-target="#addEntityModal">
                         Add Department
@@ -118,7 +117,7 @@
               
               <!-- Categories table panel -->
               <div class="panel panel-default catgsDiv">
-                  <div class="panel-heading">Store Categories</div>
+                  <div class="panel-heading"><span>Store Categories</span></div>
                   <div class="panel-body">
                       <button type="button" class="btn btn-primary pull-left addEntityModalBtn" data-toggle="modal" data-target="#addEntityModal">
                           Add Category
@@ -140,28 +139,32 @@
                 </div>
                 <!-- Sub Categories table panel -->
               <div class="panel panel-default subCatgsDiv">
-                  <div class="panel-heading">Store Sub Categories</div>
-                  <div class="panel-body">
-                      <button type="button" class="btn btn-primary pull-left addEntityModalBtn" data-toggle="modal" data-target="#addEntityModal">
-                          Add SubCategory
-                      </button>
-                      <input type="hidden" id="subCatgsOfCatgs"/>
-                      <div class="row form-group"></div>
-                      <table id="subCatgsTable" class="table table-striped table-bordered display" style="width: 100%">
-                          <thead>
-                            <tr>
-                              <th>Type</th>
-                              <th>Name</th>
-                              <th>Status</th>
-                            </tr>
-                          </thead>
-                          <tbody></tbody>
-                      </table>
-                  </div>
+                <div class="panel-heading"><span>Store Sub Categories</span></div>
+                <div class="panel-body">
+                    <button type="button" class="btn btn-primary pull-left addEntityModalBtn" data-toggle="modal" data-target="#addEntityModal">
+                        Add SubCategory
+                    </button>
+                    <input type="hidden" id="subCatgsOfCatgs"/>
+                    <div class="row form-group"></div>
+                    <table id="subCatgsTable" class="table table-striped table-bordered display" style="width: 100%">
+                        <thead>
+                          <tr>
+                            <th>Type</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
-          </div>
+              </div>
         </div>
 
+        <!-- Alert Div 
+        <div id="alert-message" class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            test error message
+        </div> -->
         <!-- Alert Model -->
         <div class="modal fade" id="alert-modal" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">

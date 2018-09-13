@@ -25,7 +25,7 @@ public class Category {
 	@Column(name="cat_name", nullable=false)
 	private String catName;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToOne(cascade = {CascadeType.MERGE})
 	@JoinColumn(name="dpt_id")
 	@JsonIgnore
 	private Department department;

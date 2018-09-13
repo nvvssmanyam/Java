@@ -15,9 +15,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.inm.stores.entities.Category;
 import com.inm.stores.entities.Department;
 import com.inm.stores.entities.Location;
+import com.inm.stores.entities.SubCategory;
 import com.inm.stores.repos.CategoryRepo;
 import com.inm.stores.repos.DepartmentRepo;
 import com.inm.stores.repos.LocationRepo;
+import com.inm.stores.repos.SubCategoryRepo;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -32,10 +34,14 @@ public class DepartmentStoresApplicationTests {
 	@Autowired
 	private CategoryRepo catRepository;
 	
+	@Autowired
+	private SubCategoryRepo subCatRepository;
+	
 	@Test
 	public void testCreateLocation() {
 		
-		Location l1 = new Location(3, "BZA", null);
+		Location l1 = new Location();
+		l1.setLocName("Bangalore");
 		locRepository.save(l1);
 	}
 
@@ -44,10 +50,13 @@ public class DepartmentStoresApplicationTests {
 		
 		Set<Department> depts = new HashSet<>();
 		Department d1 = new Department();
-		d1.setDeptName("Grocery");
+		d1.setDeptName("Reliance");
+		Department d2 = new Department();
+		d1.setDeptName("DMart");
 		depts.add(d1);
+		depts.add(d2);
 		
-		Location l1 = new Location(2, "RJY", depts);
+		Location l1 = new Location("Hyderabad", depts);
 		locRepository.save(l1);
 	}
 	
@@ -58,6 +67,40 @@ public class DepartmentStoresApplicationTests {
 		
 		for (Location loc : locations) {
 			System.out.println(loc);
+		}
+	}
+	
+	@Test 
+	public void testGetDepartments() {
+		List<Department> depts =  (List<Department>) deptRepository.findAll();
+		for (Department department : depts) {
+			System.out.println(department);
+		}
+	}
+	
+	@Test
+	public void testCreateCategory() {
+		List<Department> depts =  (List<Department>) deptRepository.findAll();
+		Department dept = null;
+		if(depts.size() > 0) {
+			dept = depts.get(0);
+			Category ctgry = new Category();
+			ctgry.setCatName("Electronics");
+			ctgry.setDepartment(dept);
+			catRepository.save(ctgry);
+		}
+	}
+	
+	@Test
+	public void testCreateSubCategory() {
+		List<Category> catgs =  (List<Category>) catRepository.findAll();
+		Category cat = null;
+		if(catgs.size() > 0) {
+			cat = catgs.get(0);
+			SubCategory subCtgry = new SubCategory();
+			subCtgry.setSubCatName("Mobiles");
+			subCtgry.setCategory(cat);
+			subCatRepository.save(subCtgry);
 		}
 	}
 	

@@ -54,9 +54,8 @@ public class Location {
 	public Location() {
 
 	}
-	public Location(int locId, String locName, Set<Department> departments) {
+	public Location(String locName, Set<Department> departments) {
 		super();
-		this.locId = locId;
 		this.locName = locName;
 		this.departments = departments;
 	}
