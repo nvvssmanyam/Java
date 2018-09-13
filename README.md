@@ -1,6 +1,6 @@
-## Excersice 1
+###### Excersice 1
 
-###### DepartmentStores Application
+## DepartmentStores Application
 
 Requirements 
 
@@ -50,9 +50,9 @@ http://localhost:_tomcat port_/home
 ```http://localhost:8080/home```
 
 
-## Excersice 2
+###### Excersice 2
 
-###### ContactApp
+## ContactApp
 
 Requirements 
 
