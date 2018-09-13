@@ -29,13 +29,13 @@ mvn clean install
 
 It will create DepartmentStores-0.0.1-SNAPSHOT.war in project directory
 
-Place the generated war file into <Installed Tomcat Directory>/webapps/
+Place the generated war file into _Installed Tomcat Directory_/webapps/
 
 **Restart tomcat** 
 
-`Installed Tomcat Directory`/bin/shutdown.bat
+_Installed Tomcat Directory_/bin/shutdown.bat
 
-`Installed Tomcat Directory`/bin/startup.bat
+_Installed Tomcat Directory_/bin/startup.bat
 
 **Example**
 ```C:\apache-tomcat-8.5.32\webapps```
@@ -44,7 +44,7 @@ Place the generated war file into <Installed Tomcat Directory>/webapps/
 
 open this url in chrome browser
 
-http://localhost:*tomcat port*/home
+http://localhost:_tomcat port_/home
 
 **Example**
 ```http://localhost:8080/home```
