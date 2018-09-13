@@ -11,7 +11,7 @@ JDK 1.8
 Maven 3
 Apache tomcat 8.5
 Postman
-Chrome
+Google Chrome
 
 Running the application locally
 
@@ -31,3 +31,17 @@ Restart tomcat
 
 To launch the application from chrome 
 http://localhost:<tomcat port>/home
+
+
+Excersice 2
+
+ContactApp
+==========
+
+Requirements 
+
+For running the application you need:
+
+Google Chrome
+
+Open the file ContactApp/contacts.html file with chrome browser
