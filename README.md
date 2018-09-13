@@ -19,18 +19,31 @@ There are several ways to run a Spring Boot application on your local machine. O
 
 Alternatively you can use the Maven build and deploy into tomcat like so:
 
+```
 mvn clean install
+```
 
 It will create DepartmentStores-0.0.1-SNAPSHOT.war
 
 Place the generated war file into <Installed Tomcat Directory>/webapps/
 
-Restart tomcat 
-<Installed Tomcat Directory>/bin/shutdown.bat
-<Installed Tomcat Directory>/bin/startup.bat
+**Restart tomcat** 
 
-To launch the application from chrome 
-http://localhost:8080<tomcat port>/home
+`Installed Tomcat Directory`/bin/shutdown.bat
+
+`Installed Tomcat Directory`/bin/startup.bat
+
+**Example**
+```C:\apache-tomcat-8.5.32\webapps```
+
+**To launch the application from chrome**
+
+open this url in chrome browser
+
+http://localhost:*tomcat port*/home
+
+**Example**
+```http://localhost:8080/home```
 
 
 ## Excersice 2
