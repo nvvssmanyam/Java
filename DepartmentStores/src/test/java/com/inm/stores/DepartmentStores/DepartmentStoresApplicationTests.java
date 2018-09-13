@@ -52,7 +52,7 @@ public class DepartmentStoresApplicationTests {
 		Department d1 = new Department();
 		d1.setDeptName("Reliance");
 		Department d2 = new Department();
-		d1.setDeptName("DMart");
+		d2.setDeptName("DMart");
 		depts.add(d1);
 		depts.add(d2);
 		
