@@ -7,11 +7,11 @@ Requirements
 
 For building and running the application you need:
 
-JDK 1.8
-Maven 3
-Apache tomcat 8.5
-Postman
-Google Chrome
+[JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+[Maven 3](https://maven.apache.org/)
+[Apache tomcat 8.5](https://tomcat.apache.org/download-80.cgi)
+[Postman](https://www.getpostman.com/apps)
+[Google Chrome](https://www.google.com/chrome/?brand=CHBD&gclid=CjwKCAjw8uLcBRACEiwAaL6MST1PbhlGn9Z6y1G_Trmh_pPXwEJFGSLmvxw5FlNJz3Yoc2F7zfHHZxoCDxkQAvD_BwE&gclsrc=aw.ds&dclid=CJ-g3bKkt90CFVGkjgodzoIPkA)
 
 Running the application locally
 
@@ -42,6 +42,6 @@ Requirements
 
 For running the application you need:
 
-Google Chrome
+[Google Chrome](https://www.google.com/chrome/?brand=CHBD&gclid=CjwKCAjw8uLcBRACEiwAaL6MST1PbhlGn9Z6y1G_Trmh_pPXwEJFGSLmvxw5FlNJz3Yoc2F7zfHHZxoCDxkQAvD_BwE&gclsrc=aw.ds&dclid=CJ-g3bKkt90CFVGkjgodzoIPkA)
 
 Open the file ContactApp/contacts.html file with chrome browser
