@@ -1,7 +1,7 @@
-Excersice 1
+## Excersice 1
 
-DepartmentStores Application
-============================
+###### DepartmentStores Application
+===================================
 
 Requirements 
 
@@ -33,10 +33,10 @@ To launch the application from chrome
 http://localhost:<tomcat port>/home
 
 
-Excersice 2
+## Excersice 2
 
-ContactApp
-==========
+###### ContactApp
+=================
 
 Requirements 
 
