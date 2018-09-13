@@ -30,7 +30,7 @@ Restart tomcat
 <Installed Tomcat Directory>/bin/startup.bat
 
 To launch the application from chrome 
-http://localhost:<tomcat port>/home
+http://localhost:8080<tomcat port>/home
 
 
 ## Excersice 2
