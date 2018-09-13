@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap.min.js"></script>
+  <script type="text/javascript" language="javascript" src="data.json"></script>
+</head>
+<body>
+    <div class="container">
+      <div>
+        <h3 class="text-center">Contact List</h3>
+      </div>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary pull-left contactModal" data-toggle="modal" data-target="#addContactModal">
+        Add Contact
+      </button>
+      
+      <input type="button" class="btn btn-default pull-right" id="contactList" value="Get Contacts" />
+      
+      
+      <!-- Modal -->
+      <div class="modal fade" id="addContactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Add Contact</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="addContactForm" action="" method="POST">
+            <div class="form-group">
+              <intpu type="hidden" id="contactId">
+              <label for="title">Title:</label>
+              <input type="text" class="form-control" id="title">
+            </div>
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone:</label>
+              <input type="text" class="form-control" id="phone">
+            </div>
+            <div class="form-group">
+              <label for="ext">Ext:</label>
+              <input type="text" class="form-control" id="ext">
+            </div>
+            <div class="form-group">
+              <label for="ext">Fax:</label>
+              <input type="text" class="form-control" id="fax">
+            </div>
+            <div class="form-group">
+              <label for="email">Email address:</label>
+              <input type="text" class="form-control" id="email">
+            </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="row form-group"></div>
+    
+      <div class="container">
+        <table id="example" class="table table-striped table-bordered display"
+          style="width: 100%">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Ext</th>
+              <th>Fax</th>
+              <th>Email</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Title</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Ext</th>
+              <th>Fax</th>
+              <th>Email</th>
+              <th>Status</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    
+      <div id="div1"></div>
+    
+    </div>
+  
+    <script type="text/javascript">
+      function editRecord(id) {
+        $.each(jsonObject, function(key, value) {
+          if(value.id==id) {
+            $("#contactId").val(id);
+            $("#title").val(value.title);
+            $("#name").val(value.name);
+            $("#phone").val(value.phone)
+            $("#ext").val(value.ext);
+            $("#fax").val(value.fax);
+            $("#email").val(value.email)
+          }
+        });
+      }
+      function deleteRecord(id) {
+        $.each(jsonObject, function(key,value) {
+          if(value.id==id) {
+            jsonObject.splice(key, 1);
+            alert("Record deleted successfully");
+            reArrangeData(id);
+            return false;
+          }
+        }); 
+        $("#contactList").click();
+      }
+
+      function changeVal(data, oldV, newV) {
+        for(var i in data) {
+          if(typeof data[i] == 'object') changeVal(data[i], oldV, newV);
+          if(data[i] == oldV) data[i] = newV
+        }
+        return data
+      }
+      function reArrangeData(id) {
+        var len = jsonObject.length;
+        jsonObject[len-1].id=id;
+        return false;
+      }
+      $(document).ready(function() {
+        $("#example").DataTable({
+          paging: false,
+          searching: false,
+          bInfo: false,
+          ordering: false
+        });
+        $("#example").hide();
+
+        // Load contact table
+        $("#contactList").click(function() {
+          if (jsonObject != null) {
+            $(".dataTables_empty").hide();
+            $("#example tbody").html("");
+            var content = "";
+            $.each(jsonObject, function(key, value) {
+              content += "<tr><td>"+value.title+"</td><td>"+value.name+"</td><td>"+value.phone+
+              "</td><td>"+value.ext+"</td><td>"+value.fax+"</td><td>"+value.email+
+              "</td><td><button type='button' data-target='#addContactModal' data-toggle='modal' onclick='editRecord("+value.id+")' style='margin-right: 16px' id="+value.id+" class='btn btn-info btn-sm editRecord'><span class='glyphicon glyphicon-pencil'></span></button>"+
+              "<button type='button' onclick='deleteRecord("+value.id+")' id="+value.id+" class='btn btn-danger btn-sm delRecord'><span class='glyphicon glyphicon-trash'></span></button></td></tr>";
+            });
+            $("#example tbody").append(content);
+            $("#example").show();
+          }
+        });
+
+        // Add contact
+        $("#addContactForm").submit(function(e) {
+          var lenght = jsonObject.length;
+          var contactId = $("#contactId").val();
+          if(contactId == "") {
+            contactId = lenght+1;
+          }
+          var contact = {
+              "id":contactId,
+              "title": $("#title").val(),
+              "name": $("#name").val(),
+              "phone": $("#phone").val(),
+              "ext": $("#ext").val(),
+              "fax": $("#fax").val(),
+              "email": $("#email").val()
+          }
+          if(contactId == lenght+1) {
+            jsonObject.push(contact);
+          } else {
+            $.each(jsonObject, function(key, value) {
+              if(value.id == contactId) {
+                jsonObject[key] = contact;
+                return false;
+              }
+            });
+          }
+          //if(title != "" && name != "" && phone != "" && ext != "" && fax != "" && email != "") {
+          debugger;
+          $(this).closest('form').find("input[type=text], textarea").val("");
+          $("#contactId").val("");
+          $('#addContactModal').modal('hide');
+          $("#contactList").click();
+          //}				
+          e.preventDefault(); // avoid to execute the actual submit of the form.
+        });
+      });
+    </script>
+  </body>
+</html>
