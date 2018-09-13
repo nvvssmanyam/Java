@@ -15,7 +15,7 @@ For building and running the application you need:
 
 Running the application locally
 
-There are several ways to run a Spring Boot application on your local machine. One way is to execute the main method in the de.codecentric.springbootsample.Application class from your IDE.
+There are several ways to run a Spring Boot application on your local machine. One way is to execute the main method in the com.inm.stores.DepartmentStores.DepartmentStoresApplication class from your IDE.
 
 Alternatively you can use the Maven build and deploy into tomcat like so:
 
