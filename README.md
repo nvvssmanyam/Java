@@ -8,6 +8,8 @@ For building and running the application you need:
 
 [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 
+[MySQL](https://dev.mysql.com/downloads/installer/)
+
 [Maven 3](https://maven.apache.org/)
 
 [Apache tomcat 8.5](https://tomcat.apache.org/download-80.cgi)
@@ -15,6 +17,18 @@ For building and running the application you need:
 [Postman](https://www.getpostman.com/apps)
 
 [Google Chrome](https://www.google.com/chrome/?brand=CHBD&gclid=CjwKCAjw8uLcBRACEiwAaL6MST1PbhlGn9Z6y1G_Trmh_pPXwEJFGSLmvxw5FlNJz3Yoc2F7zfHHZxoCDxkQAvD_BwE&gclsrc=aw.ds&dclid=CJ-g3bKkt90CFVGkjgodzoIPkA)
+
+**Basic MySQL setup**
+
+After installaion of MySQL, update the username and password in file _Project_Directory_/src\main\resources\application.properties
+
+Execute the below query in mySQL console or Workbench to create schema which is used in DepartmentStores Appliction
+
+```
+CREATE DATABASE DepartmentStores;
+```
+
+That's it, remaining tables creation will be handle by code
 
 
 **To Run the application locally**
