@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.inm.stores.entities.Category;
+import com.inm.stores.entities.Department;
 import com.inm.stores.repos.CategoryRepo;
 
 @Component
@@ -14,15 +15,29 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Autowired
 	private CategoryRepo catRepository;
-
+	
+	@Autowired
+	private DepartmentService deptService;
+	
 	@Override
-	public Category saveCategory(Category category) {
-		return catRepository.save(category);
+	public Category saveCategory(int deptId, Category category) {
+		Optional<Department> department = deptService.getDepartmentByDeptId(deptId);
+		if(department.isPresent()) {
+			category.setDepartment(department.get());
+			return catRepository.save(category);
+		}
+		return null;
 	}
 
 	@Override
-	public Category updateCategory(Category category) {
-		return catRepository.save(category);
+	public Category updateCategory(int deptId, int catId, Category categoryDeatils) {
+		Optional<Department> department = deptService.getDepartmentByDeptId(deptId);
+		Optional<Category> category = getCategoryById(catId);
+		Category cat = category.get();
+		cat.setCatId(catId);
+		cat.setCatName(categoryDeatils.getCatName());
+		cat.setDepartment(department.get());
+		return catRepository.save(cat);
 	}
 
 	@Override
@@ -51,6 +66,19 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public List<Category> getAllCategoriesByDeptId(int id) {
 		return catRepository.find(id);
+	}
+	
+	public int deleteCategoryById(int id) {
+		if(isCategoryExist(id) > 0) {
+			catRepository.deleteById(id);
+			return 1;
+		}
+		return 0;
+	}
+	
+	@Override
+	public int isCategoryExist(int catId) {
+		return catRepository.isRecordExist(catId);
 	}
 
 }

@@ -10,16 +10,20 @@ import com.inm.stores.entities.Category;
 @Service
 public interface CategoryService {
 	
-	Category saveCategory(Category category);
+	Category saveCategory(int deptId, Category category);
 	
-	Category updateCategory(Category category);
+	Category updateCategory(int deptId, int catId, Category category);
 	
 	void deleteCategory(Category category);
+	
+	int deleteCategoryById(int id);
 	
 	Optional<Category> getCategoryById(int id);
 	
 	List<Category> getAllCategories();
 	
 	List<Category> getAllCategoriesByDeptId(int id);
+	
+	int isCategoryExist(int catId);
 
 }

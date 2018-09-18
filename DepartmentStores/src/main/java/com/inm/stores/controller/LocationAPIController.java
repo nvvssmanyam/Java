@@ -19,7 +19,7 @@ import com.inm.stores.entities.Location;
 import com.inm.stores.service.LocationService;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/location")
 @Produces("application/json")
 @CrossOrigin
 public class LocationAPIController {
@@ -27,43 +27,29 @@ public class LocationAPIController {
 	@Autowired
 	LocationService locService;
 	
-	@GetMapping("/location")
+	@GetMapping()
 	public List<Location> getLocations(){
 		return locService.getAllLocation();
 	}
 	
-	@GetMapping("/location/{id}")
+	@GetMapping("/{id}")
 	public Optional<Location> getLocation(@PathVariable(value="id") int locId) {
 		return locService.getLocationById(locId);
 	}
 	
-	@PostMapping("/location")
+	@PostMapping()
 	public Location createLocation(@Valid @RequestBody Location location) {
 		return locService.saveLocation(location);
 	}
 	
-	@PutMapping("/location/{id}") 
+	@PutMapping("/{id}") 
 	public Location updateLocation(@PathVariable(value="id") int locId, 
 			@Valid @RequestBody Location locationDetails) {
-		Optional<Location> location = locService.getLocationById(locId);
-		Location loc = location.get();
-		
-		loc.setLocId(locId);
-		loc.setLocName(locationDetails.getLocName());
-		loc.setDepartments(locationDetails.getDepartments());
-		
-		return locService.saveLocation(loc);
+		return locService.updateLocation(locId, locationDetails);
 	}
 	
-	@DeleteMapping("/location/{id}")
+	@DeleteMapping("/{id}")
 	public int deleteLocation(@PathVariable(value="id") int locId) {
-		Optional<Location> loc = locService.getLocationById(locId);
-		if(loc.get() != null) {
-			locService.deleteLocation(loc.get());
-			if(locService.getLocationById(locId).isPresent()) {
-				return 0;
-			}
-		}
-		return 1;
+		return locService.deleteLocationById(locId);
 	}
 }

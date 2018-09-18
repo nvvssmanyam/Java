@@ -10,9 +10,9 @@ import com.inm.stores.entities.SubCategory;
 @Service
 public interface SubCategoryService {
 	
-	SubCategory saveSubCategory(SubCategory subCategory);
+	SubCategory saveSubCategory(int catId, SubCategory subCategory);
 	
-	SubCategory updateSubCategory(SubCategory subCategory);
+	SubCategory updateSubCategory(int catId, int subCatId, SubCategory subCategory);
 	
 	void deleteSubCategory(SubCategory subCategory);
 	
@@ -21,5 +21,9 @@ public interface SubCategoryService {
 	List<SubCategory> getAllSubCategories();
 	
 	List<SubCategory> getAllSubCategoriesByCatId(int id);
+	
+	int deleteSubCategoryById(int subCatId);
+	
+	int isSubCategoryExist(int subCatId);
 
 }

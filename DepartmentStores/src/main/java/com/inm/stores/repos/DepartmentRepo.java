@@ -22,4 +22,7 @@ public interface DepartmentRepo extends CrudRepository<Department, Integer> {
 	
 	@Query(value = "SELECT * FROM department d, category c where d.dept_id=c.dpt_id and d.dept_id=:deptId", nativeQuery = true)
 	List<Category> findAllCategories(@Param("deptId") int deptId);
+	
+	@Query(value = "SELECT COUNT(*) FROM department d where d.dept_id=:deptId", nativeQuery = true)
+	int isRecordExist(@Param("deptId") int deptId);
 }

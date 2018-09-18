@@ -11,9 +11,11 @@ public interface LocationService {
 	
 	Location saveLocation(Location location);
 	
-	Location updateLocation(Location location);
+	Location updateLocation(int locId, Location location);
 	
 	void deleteLocation(Location location);
+	
+	int deleteLocationById(int locId);
 	
 	Optional<Location> getLocationById(int id);
 	
@@ -22,5 +24,7 @@ public interface LocationService {
 	Set<Department> getDepartmentsByLocation(int id);
 	
 	Set<Department> getAllDepartments();
+	
+	int isLocationExist(int id);
 
 }

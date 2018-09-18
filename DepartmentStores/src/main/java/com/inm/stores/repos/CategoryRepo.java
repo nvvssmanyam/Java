@@ -14,4 +14,7 @@ public interface CategoryRepo extends CrudRepository<Category, Integer>{
 
 	@Query(value = "SELECT * FROM category c where c.dpt_id=:deptId", nativeQuery = true)
 	List<Category> find(@Param("deptId") int dptId);
+	
+	@Query(value = "SELECT COUNT(*) FROM category c where c.cat_id=:catId", nativeQuery = true)
+	int isRecordExist(@Param("catId") int catId);
 }
