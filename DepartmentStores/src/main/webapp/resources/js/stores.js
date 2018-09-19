@@ -111,7 +111,7 @@
       error : function(error) {
         $("#alert-header").parent().attr('class', 'alert  alert-danger');
         $("#alert-header").text("Failed");
-        $("#alert-message").text("OOPS... Something went wrong");
+        $("#alert-message").text("Record not deleted. Unique contraint error.");
         $("#alert-modal").modal('show');
       }
     });
