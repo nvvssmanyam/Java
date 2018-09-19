@@ -5,7 +5,7 @@
  var temp;
    function getDepts(locId, locName){
     $.ajax({
-      url : "/api/v1/location/"+locId+"/department",
+      url : "api/v1/location/"+locId+"/department",
       type : "GET",
       success : function(response) {
         if (response != null) {
@@ -32,7 +32,7 @@
   }
   function getCategories(locId, deptId, deptName){
     $.ajax({
-      url : "/api/v1/location/"+locId+"/department/"+deptId+"/category",
+      url : "api/v1/location/"+locId+"/department/"+deptId+"/category",
       type : "GET",
       success : function(response) {
         if (response != null) {
@@ -58,7 +58,7 @@
   }
   function getSubCategories(locId, deptId, catId, catName){
     $.ajax({
-      url : "/api/v1/location/"+locId+"/department/"+deptId+"/category/"+catId+"/subcategory",
+      url : "api/v1/location/"+locId+"/department/"+deptId+"/category/"+catId+"/subcategory",
       type : "GET",
       success : function(response) {
         if (response != null) {
@@ -82,13 +82,13 @@
   }
   function deleteRecord(locId, deptId, catId, subCatId) {
     if(subCatId != undefined) {
-      urlString = "/api/v1/location/"+locId+"/department/"+deptId+"/category/"+catId+"/subcategory/"+subCatId;
+      urlString = "api/v1/location/"+locId+"/department/"+deptId+"/category/"+catId+"/subcategory/"+subCatId;
     } else if (catId != undefined ){
-      urlString = "/api/v1/location/"+locId+"/department/"+deptId+"/category/"+catId;
+      urlString = "api/v1/location/"+locId+"/department/"+deptId+"/category/"+catId;
     } else if (deptId != undefined) {
-      urlString = "/api/v1/location/"+locId+"/department/"+deptId;
+      urlString = "api/v1/location/"+locId+"/department/"+deptId;
     } else if (locId != undefined) {
-      urlString = "/api/v1/location/"+locId;
+      urlString = "api/v1/location/"+locId;
     }
     $.ajax({
       url : urlString,
@@ -152,6 +152,7 @@
     });
 
     $(".addEntityModalBtn").click(function() {
+      $("#entityName").val("");
       var title = this.textContent.trim();
       var entity = title.split(" ")[1];
       $("#modalEntityTitle").text(title);
@@ -171,7 +172,7 @@
         $(".storesDiv").hide();
       } else {
         $.ajax({
-          url : "/api/v1/location",
+          url : "api/v1/location",
           method : "GET",
           success : function(response) {
             if (response != null) {
@@ -199,7 +200,7 @@
         $(".treeDiv").hide();
        } else {
         $.ajax({
-          url : "/api/v1/location",
+          url : "api/v1/location",
           success : function(response) {
             if (response != null) {
               $.each(response, function(key, value) {
@@ -227,16 +228,16 @@
       var deptartmentId = $("#catgsOfDept").val();
       var categoryId = $("#subCatgsOfCatgs").val();
       if(categoryId != undefined && categoryId != "") {
-        urlString = "http://localhost:8080/api/v1/location/"+locationId+"/department/"+deptartmentId+"/category/"+categoryId+"/subcategory/";
+        urlString = "api/v1/location/"+locationId+"/department/"+deptartmentId+"/category/"+categoryId+"/subcategory/";
         currentDiv = "subCatgsDiv";
       } else if (deptartmentId != undefined && deptartmentId != "" ){
-        urlString = "http://localhost:8080/api/v1/location/"+locationId+"/department/"+deptartmentId+"/category/";
+        urlString = "api/v1/location/"+locationId+"/department/"+deptartmentId+"/category/";
         currentDiv = "catgsDiv";
       } else if (locationId != undefined && locationId != "") {
-        urlString = "http://localhost:8080/api/v1/location/"+locationId+"/department/";
+        urlString = "api/v1/location/"+locationId+"/department/";
         currentDiv = "deptsDiv";
       } else {
-        urlString = "http://localhost:8080/api/v1/location/";
+        urlString = "api/v1/location/";
         currentDiv = "storesDiv";
       }
       var entitykey = $("#entityName").attr("name");
@@ -267,7 +268,7 @@
                 $('#addEntityModal').modal('hide');
                 $("#alert-header").parent().attr('class', 'alert  alert-danger');
                 $("#alert-header").text("Failed");
-                $("#alert-message").text("OOPS... Something went wrong");
+                $("#alert-message").text("Record not deleted. Unique contraint error.");
                 $("#alert-modal").modal('show');
                }
              });

@@ -7,15 +7,14 @@
 <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
 	rel="stylesheet">
 <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
-<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="/resources/js/jquery.dataTables.min.js"></script> 
-<script src="/resources/js/datatables.min.js"></script>
-<script src="/resources/js/dataTables.bootstrap.min.js"></script>
-<script	src="/resources/js/dataTables.scroller.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> 
+<script src="resources/js/datatables.min.js"></script>
+<script src="resources/js/dataTables.bootstrap.min.js"></script>
+<script	src="resources/js/dataTables.scroller.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
-<script type="text/javascript" src=/resources/js/stores.js></script>
-<link rel="stylesheet" type="text/css" href="/resources/css/dataTables.bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/resources/css/datatables.min.css">
+<script type="text/javascript" src=resources/js/stores.js></script>
+<link rel="stylesheet" type="text/css" href="resources/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="resources/css/datatables.min.css">
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 <title>Stores</title>
 </head>
