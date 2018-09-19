@@ -58,7 +58,7 @@ _Installed Tomcat Directory_/bin/startup.bat
 
 open this url in chrome browser
 
-http://localhost:_tomcat port_/home
+http://localhost:_tomcat port_/departmentstores/home
 
 **Example**
 ```http://localhost:8080/home```
