@@ -16,7 +16,7 @@
           } else {
             $.each(response, function(key, value) {
               content += "<tr><td>Department</td><td>"+value.deptName+"</td><td><button type='button' onclick='getCategories("
-              +locId+","+value.deptId+")' id="+value.deptId+" class='btn btn-success btn-sm loadDeptBtn'>Categories <span class='glyphicon glyphicon-plus'></span></button></td><td><button type='button' onclick='deleteRecord("
+              +locId+","+value.deptId+",\""+value.deptName+"\")' id="+value.deptId+" class='btn btn-success btn-sm loadDeptBtn'>Categories <span class='glyphicon glyphicon-plus'></span></button></td><td><button type='button' onclick='deleteRecord("
               +locId+","+value.deptId+")' id="+value.deptId+" class='btn btn-danger btn-sm delRecord'><span class='glyphicon glyphicon-trash'></span></button></td></tr>";
             });
           }
@@ -104,14 +104,14 @@
         } else {
           $("#alert-header").parent().attr('class', 'alert  alert-danger');
           $("#alert-header").text("Failed");
-          $("#alert-message").text("Record not deleted. Unique contraint error.");
+          $("#alert-message").text("Record not deleted. Child elements have to delete first.");
           $("#alert-modal").modal('show');
         }
       },
       error : function(error) {
         $("#alert-header").parent().attr('class', 'alert  alert-danger');
         $("#alert-header").text("Failed");
-        $("#alert-message").text("Record not deleted. Unique contraint error.");
+        $("#alert-message").text("Record not deleted. Something went wrong.");
         $("#alert-modal").modal('show');
       }
     });
@@ -224,23 +224,24 @@
     
     $("#addEntityForm").submit(function(e) {
       var currentDiv;
+      var entitykey = $("#entityName").attr("name");
       var locationId = $("#deptsOfLoc").val();
       var deptartmentId = $("#catgsOfDept").val();
       var categoryId = $("#subCatgsOfCatgs").val();
-      if(categoryId != undefined && categoryId != "") {
+      if(categoryId != undefined && categoryId != "" && entitykey == "subCatName") {
         urlString = "api/v1/location/"+locationId+"/department/"+deptartmentId+"/category/"+categoryId+"/subcategory/";
         currentDiv = "subCatgsDiv";
-      } else if (deptartmentId != undefined && deptartmentId != "" ){
+      } else if (deptartmentId != undefined && deptartmentId != "" && entitykey == "catName"){
         urlString = "api/v1/location/"+locationId+"/department/"+deptartmentId+"/category/";
         currentDiv = "catgsDiv";
-      } else if (locationId != undefined && locationId != "") {
+      } else if (locationId != undefined && locationId != "" && entitykey == "deptName") {
         urlString = "api/v1/location/"+locationId+"/department/";
         currentDiv = "deptsDiv";
-      } else {
+      } else if (entitykey == "locName") {
         urlString = "api/v1/location/";
         currentDiv = "storesDiv";
       }
-      var entitykey = $("#entityName").attr("name");
+      
       var entityval = $("#entityName").val();
       var entity ={};
       entity[entitykey] = entityval;
@@ -268,7 +269,7 @@
                 $('#addEntityModal').modal('hide');
                 $("#alert-header").parent().attr('class', 'alert  alert-danger');
                 $("#alert-header").text("Failed");
-                $("#alert-message").text("Record not deleted. Unique contraint error.");
+                $("#alert-message").text("Something went wrong.");
                 $("#alert-modal").modal('show');
                }
              });

@@ -3,11 +3,12 @@ package com.inm.stores.DepartmentStores;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,6 +24,7 @@ import com.inm.stores.repos.SubCategoryRepo;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DepartmentStoresApplicationTests {
 	
 	@Autowired
@@ -38,7 +40,7 @@ public class DepartmentStoresApplicationTests {
 	private SubCategoryRepo subCatRepository;
 	
 	@Test
-	public void testCreateLocation() {
+	public void test1CreateLocation() {
 		
 		Location l1 = new Location();
 		l1.setLocName("Bangalore");
@@ -46,7 +48,7 @@ public class DepartmentStoresApplicationTests {
 	}
 
 	@Test
-	public void testCreateLocationWithDept() {
+	public void test2CreateLocationWithDept() {
 		
 		Set<Department> depts = new HashSet<>();
 		Department d1 = new Department();
@@ -58,6 +60,32 @@ public class DepartmentStoresApplicationTests {
 		
 		Location l1 = new Location("Hyderabad", depts);
 		locRepository.save(l1);
+	}
+	
+	@Test
+	public void test3CreateCategory() {
+		List<Department> depts =  (List<Department>) deptRepository.findAll();
+		Department dept = null;
+		if(depts.size() > 0) {
+			dept = depts.get(0);
+			Category ctgry = new Category();
+			ctgry.setCatName("Electronics");
+			ctgry.setDepartment(dept);
+			catRepository.save(ctgry);
+		}
+	}
+	
+	@Test
+	public void test4CreateSubCategory() {
+		List<Category> catgs =  (List<Category>) catRepository.findAll();
+		Category cat = null;
+		if(catgs.size() > 0) {
+			cat = catgs.get(0);
+			SubCategory subCtgry = new SubCategory();
+			subCtgry.setSubCatName("Mobiles");
+			subCtgry.setCategory(cat);
+			subCatRepository.save(subCtgry);
+		}
 	}
 	
 	@Test
@@ -75,32 +103,6 @@ public class DepartmentStoresApplicationTests {
 		List<Department> depts =  (List<Department>) deptRepository.findAll();
 		for (Department department : depts) {
 			System.out.println(department);
-		}
-	}
-	
-	@Test
-	public void testCreateCategory() {
-		List<Department> depts =  (List<Department>) deptRepository.findAll();
-		Department dept = null;
-		if(depts.size() > 0) {
-			dept = depts.get(0);
-			Category ctgry = new Category();
-			ctgry.setCatName("Electronics");
-			ctgry.setDepartment(dept);
-			catRepository.save(ctgry);
-		}
-	}
-	
-	@Test
-	public void testCreateSubCategory() {
-		List<Category> catgs =  (List<Category>) catRepository.findAll();
-		Category cat = null;
-		if(catgs.size() > 0) {
-			cat = catgs.get(0);
-			SubCategory subCtgry = new SubCategory();
-			subCtgry.setSubCatName("Mobiles");
-			subCtgry.setCategory(cat);
-			subCatRepository.save(subCtgry);
 		}
 	}
 	
